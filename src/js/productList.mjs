@@ -21,7 +21,6 @@ async function productList(selector, category) {
     const products = await getData(category);
     // filter out the two unuseed tents
     const newProducts = products.filter(item => item.Id !== "989CG" && item.Id !== "880RT") 
-    console.log(newProducts);
     // render out the product list to the element
     renderListWithTemplate(productCardTemplate, elem, newProducts);
     

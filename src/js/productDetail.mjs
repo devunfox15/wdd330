@@ -1,7 +1,9 @@
 import { findProductById } from "./productData.mjs";
-import { setLocalStorage } from "./utils.mjs";
+import { setLocalStorage, loadHeaderFooter } from "./utils.mjs";
 
 let currentProduct = {};
+
+loadHeaderFooter("../partials/productHeader.html", "../partials/footer.html");
 
 function renderProductDetails() {
   // Render product details in HTML
