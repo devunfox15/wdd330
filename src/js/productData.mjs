@@ -1,18 +1,24 @@
-function convertToJson(res) {
-  if (res.ok) {
-    return res.json();
-  } else {
-    throw new Error("Bad Response");
-  }
-}
+import { convertToJson } from "./utils.mjs"; // Assuming you have a convertToJson function in utils.mjs
 
-export function getData(category = "tents") {
-  return fetch(`../json/${category}.json`)
-    .then(convertToJson)
-    .then((data) => data);
+const baseURL = import.meta.env.VITE_SERVER_URL;
+
+export async function getData(category = "tents") {
+    const response = await fetch(`${baseURL}products/search/${category}`);
+    const data = await convertToJson(response);
+    return data.Result;
 }
 
 export async function findProductById(id) {
-  const products = await getData();
-  return products.find((item) => item.Id === id);
+  try {
+    const response = await fetch(`${baseURL}product/${id}`);
+    if (response.ok) {
+      const product = await response.json();
+      return product;
+    } else {
+      throw new Error("Product not found");
+    }
+  } catch (error) {
+    console.log("Error fetching product:", error);
+    return null; // Return null or another appropriate value to indicate the error
+  }
 }

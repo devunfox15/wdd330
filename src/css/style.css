@@ -220,3 +220,28 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/* styles for grid of 4 boxes showing product categories */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.category-grid .category-box {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+.category-grid .category-box img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+.category-grid .category-box h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
