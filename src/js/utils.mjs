@@ -77,3 +77,6 @@ export async function loadHeaderFooter(headerpath, footerpath) {
 }
 
 
+export function convertToJson(data) {
+  return JSON.stringify(data);
+}

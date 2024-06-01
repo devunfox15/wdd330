@@ -18,7 +18,7 @@ export async function findProductById(id) {
       throw new Error("Product not found");
     }
   } catch (error) {
-    console.log("Error fetching product:", error);
-    return null; // Return null or another appropriate value to indicate the error
+    throw new Error("Error fetching product:", error);
+     // Return null or another appropriate value to indicate the error
   }
 }
