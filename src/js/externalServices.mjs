@@ -3,7 +3,7 @@ import { convertToJson } from "./utils.mjs"; // Assuming you have a convertToJso
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
 
-export async function getData(category = "tents") {
+export async function getProductsByCategory(category = "tents") {
     const response = await fetch(`${baseURL}products/search/${category}`);
     const data = await convertToJson(response);
     return data.Result;
