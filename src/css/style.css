@@ -201,6 +201,10 @@ button {
   grid-row: 2;
   grid-column: 3;
 }
+#checkout-form{
+  display: flex;
+  flex-direction: column;
+}
 
 @media screen and (min-width: 500px) {
   body {
