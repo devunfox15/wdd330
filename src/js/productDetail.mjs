@@ -8,16 +8,17 @@ loadHeaderFooter("../partials/header.html", "../partials/footer.html");
 
 async function productDetails(productId, selector) {
   const elem = document.querySelector(selector);
-  const product = await findProductById(productId);
+  const currentProduct = await findProductById(productId);
+  const product = currentProduct.Result;
   console.log(product);
   if (product) {
-    document.getElementById("productName").textContent = product.Result.Brand.Name;
-    document.getElementById("productNameWithoutBrand").textContent = product.Result.NameWithoutBrand;
-    document.getElementById("productImage").src = product.Result.Images.PrimaryMedium;
+    document.getElementById("productName").textContent = product.Brand.Name;
+    document.getElementById("productNameWithoutBrand").textContent = product.NameWithoutBrand;
+    document.getElementById("productImage").src = product.Images.PrimaryMedium;
     document.getElementById("productImage").alt = product.Name;
-    document.getElementById("productFinalPrice").textContent = `$${product.Result.FinalPrice}`;
-    document.getElementById("productColorName").textContent = product.Result.Category;
-    document.getElementById("productDescriptionHtmlSimple").innerHTML = product.Result.DescriptionHtmlSimple;
+    document.getElementById("productFinalPrice").textContent = `$${product.FinalPrice}`;
+    document.getElementById("productColorName").textContent = capitalizeFirstLetter(product.Category);
+    document.getElementById("productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
 
     // Add listener to "Add to Cart" button
     const addToCartButton = document.getElementById("addToCart");
@@ -33,6 +34,9 @@ async function productDetails(productId, selector) {
 function addToCart(product) {
   // Function to add product to cart
   setLocalStorage("so-cart", product);
+}
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 export default productDetails;
