@@ -35,6 +35,7 @@ function addToCart(product) {
   // Function to add product to cart
   setLocalStorage("so-cart", product);
 }
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
