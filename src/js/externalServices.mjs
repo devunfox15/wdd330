@@ -23,3 +23,15 @@ export async function findProductById(id) {
      // Return null or another appropriate value to indicate the error
   }
 }
+
+
+export async function checkout(payload) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  };
+  return await fetch(baseURL + "checkout/", options).then(convertToJson);
+}
