@@ -1,4 +1,4 @@
-import { getData } from "./productData.mjs";
+import { getProductsByCategory } from "./externalServices.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
@@ -19,7 +19,7 @@ async function productList(selector, category) {
     // get the element we will insert the list into from the selector
     const elem = document.querySelector(selector);
     // get the list of products 
-    const products = await getData(category);
+    const products = await getProductsByCategory(category);
     // filter out the two unuseed tents
     const newProducts = products.filter(item => item.Id !== "989CG" && item.Id !== "880RT") 
     // render out the product list to the element

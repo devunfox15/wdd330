@@ -77,6 +77,10 @@ export async function loadHeaderFooter(headerpath, footerpath) {
 }
 
 
-export function convertToJson(data) {
-  return JSON.stringify(data);
+export function convertToJson(res) {
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error("Bad Response");
+  }
 }

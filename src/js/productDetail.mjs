@@ -1,38 +1,47 @@
-import { findProductById } from "./productData.mjs";
-import { setLocalStorage, loadHeaderFooter } from "./utils.mjs";
+// productDetail.mjs
+import { getLocalStorage, setLocalStorage, loadHeaderFooter} from "./utils.mjs";
+import {findProductById } from "./externalServices.mjs";
 
-let currentProduct = {};
+loadHeaderFooter("../partials/header.html", "../partials/footer.html");
 
-loadHeaderFooter("../partials/productHeader.html", "../partials/footer.html");
-
-function renderProductDetails() {
-  // Render product details in HTML
-  const productContainer = document.getElementById("product-details");
-
-  // Example rendering of product details
-  productContainer.innerHTML = `
-    <div>
-      <h2>${currentProduct.name}</h2>
-      <p>${currentProduct.description}</p>
-      <p>Price: $${currentProduct.price}</p>
-      <button id="addToCart" data-id="${currentProduct.id}">Add to Cart</button>
-    </div>
-  `;
-}
+let product = {};
 
 async function productDetails(productId) {
-  // Find product by id
-  currentProduct = await findProductById(productId);
-  if (currentProduct) {
-    renderProductDetails();
-  } else {
-    console.error("Product not found.");
-  }
-}
+  const newProduct = await findProductById(productId);
+  product = newProduct.Result;
+  renderProductDetails();
 
-function addToCart() {
-  // Function to add product to cart
-  setLocalStorage("so-cart", currentProduct);
+
+    // Add listener to "Add to Cart" button
+    document.getElementById("addToCart").addEventListener("click", addToCart);
+  }
+
+
+  function addToCart() {
+    let cartContents = getLocalStorage("so-cart");
+    console.log(cartContents);
+    //check to see if there was anything there
+    if (!cartContents) {
+      cartContents = [];
+    }
+    // then add the current product to the list
+    cartContents.push(product);
+    setLocalStorage("so-cart", cartContents);
+    console.log(cartContents);
+  }
+
+  function renderProductDetails() {
+    document.getElementById("productName").textContent = product.Brand.Name;
+    document.getElementById("productNameWithoutBrand").textContent = product.NameWithoutBrand;
+    document.getElementById("productImage").src = product.Images.PrimaryMedium;
+    document.getElementById("productImage").alt = product.Name;
+    document.getElementById("productFinalPrice").textContent = `$${product.FinalPrice}`;
+    document.getElementById("productColorName").textContent = capitalizeFirstLetter(product.Category);
+    document.getElementById("productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
+  }
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 export default productDetails;

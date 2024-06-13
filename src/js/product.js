@@ -3,5 +3,10 @@ import { getParam } from "./utils.mjs";
 import productDetails from "./productDetail.mjs";
 
 const productId = getParam("product");
-productDetails(productId);
+
+if (productId){
+    productDetails(productId, ".product-detail");
+    //console.log(productDetails);
+}
+
 
