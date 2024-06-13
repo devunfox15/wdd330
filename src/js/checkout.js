@@ -4,6 +4,8 @@ import {checkoutProcess} from "./checkoutProcess.mjs";
 loadHeaderFooter("../../partials/checkoutHeader.html", "../../partials/footer.html");
 
 
+checkoutProcess.init("so-cart", ".checkout-summary");
+
 document
   .querySelector("#customerZip")
   .addEventListener(

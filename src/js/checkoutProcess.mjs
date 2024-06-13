@@ -38,6 +38,7 @@ export const checkoutProcess = {
     this.outputSelector = outputSelector;
     this.list = getLocalStorage(key);
     this.calculateItemSummary();
+    this.calculateOrdertotal();
   },
   calculateItemSummary: function () {
     const summaryElement = document.querySelector(
@@ -66,6 +67,7 @@ export const checkoutProcess = {
   displayOrderTotals: function () {
     const shipping = document.querySelector(this.outputSelector + " #shipping");
     const tax = document.querySelector(this.outputSelector + " #tax");
+    console.log("display order totals called, shipping:" + this.shipping)
     const orderTotal = document.querySelector(
       this.outputSelector + " #orderTotal"
     );
