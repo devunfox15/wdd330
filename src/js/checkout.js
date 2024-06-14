@@ -16,6 +16,11 @@ document
 // this is how it would look if we listen for the submit on the form
 document.forms["checkout-form"].addEventListener("submit", (e) => {
   e.preventDefault();
+  var myForm = document.forms[0];
+  var chK_status = myForm.checkValidity();
+  myForm.reportValidity();
+  if (chK_status) {
   // e.target would contain our form in this case
   checkoutProcess.checkout(e.target);
+  }
 });

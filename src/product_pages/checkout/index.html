@@ -16,43 +16,50 @@
           <fieldset>
             <legend>Shipping</legend>
             <div>
-              <label for="customerFn">First Name:</label>
-              <input type="text" id="customerFn" name="customerFn" required>
+              <label for="customerFn">First Name:<span>*</span></label>
+              <input type="text" id="customerFn" name="customerFn" minlength="1" required>
             </div>
             <div>
-              <label for="customerLn">Last Name:</label>
-              <input type="text" id="customerLn" name="customerLn" required>
+              <label for="customerLn">Last Name:<span>*</span></label>
+              <input type="text" id="customerLn" name="customerLn" minlength="1" pattern="" required>
             </div>
+            <!--The longest street name 38 characters longest in the us -->
             <div>
-              <label for="customerStreet">Street:</label>
-              <input type="text" id="customerStreet" name="customerStreet" required>
+              <label for="customerStreet">Street:<span>*</span></label>
+              <input type="text" id="customerStreet" name="customerStreet" pattern="[a-zA-Z 0-9 (.)]+" placeholder="street" minlength="1" maxlength="38" required>
             </div>
+            <!-- city is not case sensitive, must be at least one letter city names are a big outlier and only can be enforced with letters, no typical size. UPPS says 28 character is the longest names. y in alaska is a letter -->
             <div>
-              <label for="customerCity">City:</label>
-              <input type="text" id="customerCity" name="customerCity" required>
+              <label for="customerCity">City:<span>*</span></label>
+              <input type="text" id="customerCity" name="customerCity" pattern="[a-zA-Z ]+" maxlength="28" placeholder="city" required>
             </div>
+            <!-- state is a 2 letter abbreviation, it is not case sensitive, must be two letters -->
             <div>
-              <label for="customerState">State:</label>
-              <input type="text" id="customerState" name="customerState" required>
+              <label for="customerState">State:<span>*</span></label>
+              <input type="text" id="customerState" name="customerState" placeholder="2-letter abbreviation" minlength="2" maxlength="2" pattern ="[a-zA-Z]{2}" required>
             </div>
+            <!-- zip is a 5 digit number, only numbers. Used a pattern to make sure it is a 5 digit number text -->  
             <div>
-              <label for="customerZip">Zip:</label>
-              <input type="number" id="customerZip" name="customerZip" required>
+              <label for="customerZip">Zip:<span>*</span></label>
+              <input type="text" id="customerZip" name="customerZip" minlength="5" maxlength="5" placeholder="zipcode" pattern="[0-9]{5}" required>
             </div>
           </fieldset>
         <fieldset>
           <legend>Payment</legend>
           <div>
-            <label for="creditCardNumber">Credit Card Number:</label>
-            <input type="number" id="creditCardNumber" name="creditCardNumber" required>
+            <!-- credit card validation, research show credit card are usually 15-16 digits but can range from 8-19 digits we cant use a regex for numbers -->
+            <label for="creditCardNumber">Credit Card Number:<span> *</span></label>
+            <input type="text" id="creditCardNumber" name="creditCardNumber" minlength="8" maxlength="24" placeholder="XXXX-XXXX-XXXX-XXXX" required>
           </div>
+          <!--Expirtation Date have 4 digits but their is als a forward slash that divides the numbers so we either make it a string or a number with two seperate inputs for user input. As a programmer i fee like people would make fewer mistakes in a text that has a patern that takes two numbers seperated by a forward slash and two numbers. NEEDS a check Date Comparison to prevent an expired card, we call a function with onclick of the ubmit button  -->
           <div>
-            <label for="expirationDate">Expiration Date:</label>
-            <input type="text" id="expirationDate" name="expirationDate" required>
+            <label for="expirationDate">Expiration Date: <span>*</span></label>
+            <input type="text" id="expirationDate" name="expirationDate" maxlength="5" required placeholder="MM/YY" pattern="[0-9]{2}/[0-9]{2}">
           </div>
+          <!--security code is usually 3 or 4 digits, they are also only numbers-->
           <div>
-            <label for="securityCode">Security Code:</label>
-            <input type="number" id="securityCode" name="securityCode" required>
+            <label for="securityCode">Security Code:<span>*</span></label>
+            <input type="number" id="securityCode" name="securityCode" placeholder="CVV/CVC" minlength="3" maxlength="4" required>
           </div>
         </fieldset>
         <fieldset class="checkout-summary">
@@ -83,5 +90,6 @@
       </section>
     </main>
     <footer id="main-footer"></footer>
+    <script src="../../js/creditCardVaidation.js"></script>
   </body>
 </html>

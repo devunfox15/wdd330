@@ -77,10 +77,11 @@ export async function loadHeaderFooter(headerpath, footerpath) {
 }
 
 
-export function convertToJson(res) {
+export async function convertToJson(res) {
+  const  response = await res.json();
   if (res.ok) {
-    return res.json();
+    return response;
   } else {
-    throw new Error("Bad Response");
+    throw {name:"servicesError", message: response};
   }
 }
