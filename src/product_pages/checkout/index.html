@@ -15,51 +15,55 @@
         <form id="checkout-form">
           <fieldset>
             <legend>Shipping</legend>
+            <!-- Had to rename the form inputs because the API was looking for these names - Austin -->
             <div>
-              <label for="customerFn">First Name:<span>*</span></label>
-              <input type="text" id="customerFn" name="customerFn" minlength="1" required>
+              <label for="fname">First Name:<span>*</span></label>
+              <input type="text" id="fname" name="fname" minlength="1" required>
             </div>
             <div>
-              <label for="customerLn">Last Name:<span>*</span></label>
-              <input type="text" id="customerLn" name="customerLn" minlength="1" pattern="" required>
+              <label for="lname">Last Name:<span>*</span></label>
+              <input type="text" id="lname" name="lname" minlength="1" required>
             </div>
             <!--The longest street name 38 characters longest in the us -->
             <div>
-              <label for="customerStreet">Street:<span>*</span></label>
-              <input type="text" id="customerStreet" name="customerStreet" pattern="[a-zA-Z 0-9 (.)]+" placeholder="street" minlength="1" maxlength="38" required>
+              <label for="street">Street:<span>*</span></label>
+              <input type="text" id="street" name="street"  placeholder="street" minlength="1" maxlength="38" required><!-- pattern="[a-zA-Z 0-9 (.)]+" --> <!-- This pattern wasn't being accepted as a proper regexp pattern - Austin -->
             </div>
             <!-- city is not case sensitive, must be at least one letter city names are a big outlier and only can be enforced with letters, no typical size. UPPS says 28 character is the longest names. y in alaska is a letter -->
             <div>
-              <label for="customerCity">City:<span>*</span></label>
-              <input type="text" id="customerCity" name="customerCity" pattern="[a-zA-Z ]+" maxlength="28" placeholder="city" required>
+              <label for="city">City:<span>*</span></label>
+              <input type="text" id="city" name="city" maxlength="28" placeholder="city" required><!--  pattern="[a-zA-Z ]+" --> <!-- This pattern wasn't being accepted as a proper regexp pattern - Austin -->
             </div>
             <!-- state is a 2 letter abbreviation, it is not case sensitive, must be two letters -->
             <div>
-              <label for="customerState">State:<span>*</span></label>
-              <input type="text" id="customerState" name="customerState" placeholder="2-letter abbreviation" minlength="2" maxlength="2" pattern ="[a-zA-Z]{2}" required>
+              <label for="state">State:<span>*</span></label>
+              <input type="text" id="state" name="state" placeholder="2-letter abbreviation" minlength="2" maxlength="2" pattern ="[a-zA-Z]{2}" required>
             </div>
             <!-- zip is a 5 digit number, only numbers. Used a pattern to make sure it is a 5 digit number text -->  
             <div>
-              <label for="customerZip">Zip:<span>*</span></label>
-              <input type="text" id="customerZip" name="customerZip" minlength="5" maxlength="5" placeholder="zipcode" pattern="[0-9]{5}" required>
+              <label for="zip">Zip:<span>*</span></label>
+              <input type="text" id="zip" name="zip" minlength="5" maxlength="5" placeholder="zipcode" pattern="[0-9]{5}" required>
             </div>
           </fieldset>
         <fieldset>
           <legend>Payment</legend>
           <div>
+            <label for="cardNumber">Card number</label>
+            <input name="cardNumber" required />
+           <!-- this was not working how the API expected - Austin -->
             <!-- credit card validation, research show credit card are usually 15-16 digits but can range from 8-19 digits we cant use a regex for numbers -->
-            <label for="creditCardNumber">Credit Card Number:<span> *</span></label>
-            <input type="text" id="creditCardNumber" name="creditCardNumber" minlength="8" maxlength="24" placeholder="XXXX-XXXX-XXXX-XXXX" required>
-          </div>
+           <!--  <label for="cardNumber">Credit Card Number:<span> *</span></label>
+            <input type="text" id="cardNumber" name="cardNumber" minlength="8" maxlength="24" placeholder="XXXX-XXXX-XXXX-XXXX" required>
+          </div> -->
           <!--Expirtation Date have 4 digits but their is als a forward slash that divides the numbers so we either make it a string or a number with two seperate inputs for user input. As a programmer i fee like people would make fewer mistakes in a text that has a patern that takes two numbers seperated by a forward slash and two numbers. NEEDS a check Date Comparison to prevent an expired card, we call a function with onclick of the ubmit button  -->
           <div>
-            <label for="expirationDate">Expiration Date: <span>*</span></label>
-            <input type="text" id="expirationDate" name="expirationDate" maxlength="5" required placeholder="MM/YY" pattern="[0-9]{2}/[0-9]{2}">
+            <label for="expiration">Expiration Date: <span>*</span></label>
+            <input type="text" id="expiration" name="expiration" maxlength="5" required placeholder="MM/YY" pattern="[0-9]{2}/[0-9]{2}">
           </div>
           <!--security code is usually 3 or 4 digits, they are also only numbers-->
           <div>
-            <label for="securityCode">Security Code:<span>*</span></label>
-            <input type="number" id="securityCode" name="securityCode" placeholder="CVV/CVC" minlength="3" maxlength="4" required>
+            <label for="code">Security Code:<span>*</span></label>
+            <input type="number" id="code" name="code" placeholder="CVV/CVC" minlength="3" maxlength="4" required>
           </div>
         </fieldset>
         <fieldset class="checkout-summary">
@@ -84,12 +88,12 @@
           </ul>
         </fieldset>
 
-          <button type="submit">Submit</button>
+        <button id="checkoutSubmit" type="submit">Checkout</button>
           
         </form>
       </section>
     </main>
     <footer id="main-footer"></footer>
-    <script src="../../js/creditCardVaidation.js"></script>
+    <!-- <script src="../../js/creditCardVaidation.js"></script> --> <!-- This was not working for how the API expected -->
   </body>
 </html>

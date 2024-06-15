@@ -1,5 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const creditCardInput = document.getElementById("creditCardNumber");
+/* this was not working how the API expected */
+/* document.addEventListener("DOMContentLoaded", function () {
+    const creditCardInput = document.getElementById("cardNumber");
 
     creditCardInput.addEventListener("input", function (e) {
         let value = e.target.value.replace(/\D/g, ""); // Remove all non-digit characters
@@ -14,4 +15,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
         e.target.value = formattedValue;
     });
-});
+}); */
